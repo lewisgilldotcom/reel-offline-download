@@ -51,14 +51,28 @@
       });
       chrome.tabs.onActivated.addListener(async () => {
         const url = await getCurrentBrowserUrl();
-        await downloadUrl(url);
+        if (isValidUrl(url)) {
+          await downloadUrl(url);
+        }
       });
       chrome.tabs.onUpdated.addListener(async (tabId, changeInfo) => {
         if (changeInfo.status === "complete") {
           const url = await getCurrentBrowserUrl();
+          if (isValidUrl(url)) {
+            await downloadUrl(url);
+          }
+        }
+      });
+      chrome.webNavigation.onHistoryStateUpdated.addListener(async (details) => {
+        await new Promise((resolve) => setTimeout(resolve, 2e3));
+        const url = await getCurrentBrowserUrl();
+        if (isValidUrl(url)) {
           await downloadUrl(url);
         }
       });
+      function isValidUrl(url) {
+        return url.startsWith("https://www.instagram.com/reels/");
+      }
     }
   });
   require_background();

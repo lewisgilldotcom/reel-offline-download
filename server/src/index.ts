@@ -1,17 +1,29 @@
 import express from 'express';
 import { YtDlp } from 'ytdlp-nodejs';
+import { mkdirSync } from 'fs';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const downloadsDir = resolve(__dirname, '../downloads');
+
+mkdirSync(downloadsDir, { recursive: true });
 
 const app = express();
 const ytdlp = new YtDlp();
 
 app.use(express.json());
 
-// Allow requests from the Chrome extension
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
+
+const currentlyDownloading = new Set<string>();
+
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 app.post('/download', async (req, res) => {
     const { url } = req.body;
@@ -21,19 +33,29 @@ app.post('/download', async (req, res) => {
         return;
     }
 
+    if (currentlyDownloading.has(url)) {
+        res.json({ success: true, message: 'Already downloading' });
+        return;
+    }
+
+    currentlyDownloading.add(url);
+
     try {
         await ytdlp
             .download(url)
+            .cookiesFromBrowser('chromium')
             .filter('mergevideo')
-            .output('../downloads')
-            .quality('1080p')
-            .type('mp4')
+            .setOutputTemplate(`${downloadsDir}/%(id)s.%(ext)s`)
+            .addArgs('--no-part')
             .on('progress', (p) => console.log(`${p.percentage_str}`))
             .run();
 
         res.json({ success: true });
     } catch (error) {
+        console.error('Download failed for URL:', url, error);
         res.status(500).json({ error: 'Download failed' });
+    } finally {
+        currentlyDownloading.delete(url);
     }
 });
 

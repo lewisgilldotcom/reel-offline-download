@@ -3,7 +3,7 @@
     "name": "Reel Offline Downloader",
     "version": "1.0",
     "description": "Downloads reels automatically as you scroll",
-    "permissions": ["activeTab", "tabs"],
+    "permissions": ["activeTab", "tabs", "webNavigation"],
     "action": {
         "default_popup": "popup.html"
     },
