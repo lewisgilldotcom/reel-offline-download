@@ -13,7 +13,7 @@ Extension is installed and ready for testing
 1. Install Node.js (https://nodejs.org/en/download)
 2. Install homebrew (https://phoenixnap.com/kb/install-homebrew-on-mac)
 3. Install yt-dlp (https://github.com/yt-dlp/yt-dlp/wiki/Installation in the binary section)
-4. Install FFMPEG https://phoenixnap.com/kb/ffmpeg-mac
+4. Install FFMPEG using homebrew (https://phoenixnap.com/kb/ffmpeg-mac)
 5. Install Chromium (https://www.google.com/chrome/canary/)
 6. Run `npm run build` from extension directory
 7. Start the server locally by running `npm start` from the server directory
