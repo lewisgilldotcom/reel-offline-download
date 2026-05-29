@@ -1,0 +1,24 @@
+{
+  "name": "reel-offline-download",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild src/background.ts src/content.ts src/popup.ts src/downloadUrl.ts --bundle --outdir=dist && npm run copy",
+    "watch": "esbuild src/background.ts --bundle --outdir=dist --watch",
+    "copy": "mkdir -p dist && cp public/manifest.json dist/ && cp -r public/icons dist/ && cp public/*.html dist/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/chrome": "^0.1.42",
+    "esbuild": "^0.28.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "ytdlp-nodejs": "^3.4.4"
+  }
+}
