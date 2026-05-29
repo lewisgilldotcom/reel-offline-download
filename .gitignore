@@ -175,3 +175,4 @@ dist
 .DS_Store
 
 server/downloads
+node_modules
