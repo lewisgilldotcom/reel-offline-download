@@ -11,9 +11,13 @@ Extension is installed and ready for testing
 
 # Running
 1. Install Node.js (https://nodejs.org/en/download)
-2. Run `npm run build` from extension directory
-3. Start the server locally by running `npm start` from the server directory
-4. Open `chrome://extensions/` in Chrome
-5. Select 'Load unpacked', then selected the `extension/dist` folder
-6. Open the extension and ensure it reports the server is running
-7. Scroll and download reels. Don't go too fast or use a VPN, you'll get rate limited!
+2. Install homebrew (https://phoenixnap.com/kb/install-homebrew-on-mac)
+3. Install yt-dlp (https://github.com/yt-dlp/yt-dlp/wiki/Installation in the binary section)
+4. Install FFMPEG https://phoenixnap.com/kb/ffmpeg-mac
+5. Install Chromium (https://www.google.com/chrome/canary/)
+6. Run `npm run build` from extension directory
+7. Start the server locally by running `npm start` from the server directory
+8. Open `chrome://extensions/` in Chromium
+9. Select 'Load unpacked', then selected the `extension/dist` folder
+10. Open the extension and ensure it reports the server is running
+11. Scroll and download reels. Don't go too fast or use a VPN, you'll get rate limited!
