@@ -17,7 +17,7 @@ Extension is installed and ready for testing
 5. Install Chromium (https://www.google.com/chrome/canary/)
 6. Run `npm run build` from extension directory
 7. Start the server locally by running `npm start` from the server directory
-8. Open `chrome://extensions/` in Chromium
+8. Open `chrome://extensions/` in Chromium, enable developer mode
 9. Select 'Load unpacked', then selected the `extension/dist` folder
 10. Open the extension and ensure it reports the server is running
 11. Scroll and download reels. Don't go too fast or use a VPN, you'll get rate limited!
